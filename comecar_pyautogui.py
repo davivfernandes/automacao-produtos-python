@@ -1,62 +1,87 @@
 import pyautogui
+import pandas as pd
 import time
+import getpass
+
 pyautogui.PAUSE = 1
+
+# Dados de login
+email = input("fulano@gmail.com")
+senha = getpass.getpass("1234feijaonoprato")
+
+# Link do sistema
 link = "https://dlp.hashtagtreinamentos.com/python/intensivao/login"
+
+# Abrir o Chrome
 pyautogui.press("win")
 pyautogui.write("chrome")
 pyautogui.press("enter")
-pyautogui.click(x=455, y=924)
-pyautogui.press("enter") 
+time.sleep(3)
+
+# Abrir o site
+pyautogui.hotkey("ctrl", "l")
 pyautogui.write(link)
 pyautogui.press("enter")
 time.sleep(3)
+
+# Fazer login
 pyautogui.click(x=638, y=474)
-pyautogui.write("davifernandes150410@gmail.com")
+pyautogui.write(email)
+
 pyautogui.press("tab")
-pyautogui.write("123456")
+pyautogui.write(senha)
+
 pyautogui.press("enter")
 time.sleep(4)
-#base de dados cabulosa
-import pandas as pd
-import openpyxl
-tabela = pd.read_csv(r"C:\Users\davif\Downloads\produtos (1).csv")
+
+# Ler base de dados
+tabela = pd.read_csv("produtos.csv")
+
 print(tabela)
-#cadastrar produto
+
+# Cadastrar produtos
 for linha in tabela.index:
-    #codigo
+
     pyautogui.click(x=666, y=321)
+
+    # Código
     codigo = str(tabela.loc[linha, "codigo"])
     pyautogui.write(codigo)
     pyautogui.press("tab")
-    #marca
+
+    # Marca
     marca = str(tabela.loc[linha, "marca"])
     pyautogui.write(marca)
     pyautogui.press("tab")
-    #tipo
+
+    # Tipo
     tipo = str(tabela.loc[linha, "tipo"])
     pyautogui.write(tipo)
     pyautogui.press("tab")
-    #categoria
+
+    # Categoria
     categoria = str(tabela.loc[linha, "categoria"])
     pyautogui.write(categoria)
     pyautogui.press("tab")
-    #preco_unitario
+
+    # Preço unitário
     preco_unitario = str(tabela.loc[linha, "preco_unitario"])
     pyautogui.write(preco_unitario)
     pyautogui.press("tab")
-    #custo
+
+    # Custo
     custo = str(tabela.loc[linha, "custo"])
     pyautogui.write(custo)
     pyautogui.press("tab")
-    #obs
+
+    # Observação
     obs = str(tabela.loc[linha, "obs"])
-    if obs!= "nan":
+
+    if obs != "nan":
         pyautogui.write(obs)
+
     pyautogui.press("tab")
-
     pyautogui.press("enter")
 
-    pyautogui.press("enter")
+    # Voltar para o topo
     pyautogui.scroll(5000)
-         
-   
